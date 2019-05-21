@@ -2,6 +2,8 @@
 1. Install Docker on all nodes
 2. Install Kubectl on all nodes and master
 3. Install RKE on master.
+4. Setup SSH tunneling rancher to all nodes.
+5. Open firewall ports as a services for all nodes and rancher.
  
 Create four CentOs-7 VM :
 1. Rancher : CPU 2 cores, RAM 4G, HD 40G
@@ -73,7 +75,7 @@ EOF
 $ yum install -y kubectl
 ```
 
-### 2. Install RKE (Rancher Kubernetes Engine) on Rancher
+### 3. Install RKE (Rancher Kubernetes Engine) on Rancher
 
 1.Download `RKE`.
 ```
@@ -91,5 +93,108 @@ $ chmod +x /usr/bin/rke
 ```
 $ rke --version
 ```
+### 4. Setup SSH tunneling rancher to all nodes.
+Clease check `ip` address on all nodes and rancher.
 
+Example, all VM `ip` address in my PC is:
+<table>
+  <tr>
+    <td>
+      Rancher
+    </td>
+    <td>
+      192.168.123.8
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Node1
+    </td>
+    <td>
+      192.168.123.9
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Node2
+    </td>
+    <td>
+      192.168.123.10
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Node3
+    </td>
+    <td>
+      192.168.123.11
+    </td>
+  </tr>
+</table>
 
+1.Run `ssh-keygen` on Rancher.
+```
+$ ssh-keygen
+```
+2.Copy `ssh-id` to all nodes.
+```
+$ ssh-copy-id dockeruser@192.168.123.9
+$ ssh-copy-id dockeruser@192.168.123.10
+$ ssh-copy-id dockeruser@192.168.123.11
+```
+### 5. Open firewall ports as a services for all nodes and rancher.
+1.Create `firewall-config` file for all nodes with name `node-firewall.xml`.
+```
+$ vi node-firewall.xml
+```
+node-firewall.xml
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+	<port port="2376" protocol="tcp"/>
+	<port port="2379" protocol="tcp"/>
+	<port port="2380" protocol="tcp"/>
+	<port port="8472" protocol="udp"/>
+	<port port="9099" protocol="tcp"/>
+	<port port="10250" protocol="tcp"/>
+	<port port="443" protocol="tcp"/>
+	<port port="6443" protocol="tcp"/>
+	<port port="8472" protocol="udp"/>
+	<port port="6443" protocol="tcp"/>
+	<port port="10254" protocol="tcp"/>
+	<port port="30000-32767" protocol="tcp"/>
+</service>
+```
+Run the following command
+```
+$ firewall-offline-cmd --new-service-from-file=rancher-firewall.xml --name=rancher-firewall
+$ firewall-cmd --reload
+$ firewall-cmd --add-service rancher-firewall
+```
+2.Create `firewall-config` file for all rancher with name `rancher-firewall.xml`.
+```
+$ vi rancher-firewall.xml
+```
+rancher-firewall.xml
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+	<port port="80" protocol="tcp"/>
+	<port port="433" protocol="tcp"/>
+	<port port="22" protocol="tcp"/>
+	<port port="2376" protocol="tcp"/>
+	<port port="6443" protocol="tcp"/>
+</service>
+```
+Run the following command
+```
+$ firewall-offline-cmd --new-service-from-file=rancher-firewall.xml --name=rancher-firewall
+$ firewall-cmd --reload
+$ firewall-cmd --add-service rancher-firewall
+```
+3.If you don't want to do `step-1` and `step-2`, you can disable `firewall` service.
+```
+$ systemctl stop firewalld
+$ systemctl disable firewalld
+$ systemctl status firewalld
+```
