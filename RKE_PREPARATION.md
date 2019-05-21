@@ -74,7 +74,7 @@ EOF
 $ yum install -y kubectl
 ```
 
-### 2. Install RKE (Runcher Kubernetes Engine) master
+### 2. Install RKE (Rancher Kubernetes Engine) master
 
 1.Download `RKE`.
 ```
