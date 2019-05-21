@@ -4,7 +4,7 @@
 3. Install RKE on master.
  
 Create four CentOs-7 VM :
-1. Master/Rancher : CPU 2 cores, RAM 4G, HD 40G
+1. Rancher : CPU 2 cores, RAM 4G, HD 40G
 2. Node1/Kube1 : CPU 2 cores, RAM 4G, HD 40G
 3. Node2/Kube2 : CPU 2 cores, RAM 4G, HD 40G
 4. Node3/Kube3 : CPU 2 cores, RAM 4G, HD 40G
@@ -59,7 +59,7 @@ $ chown "dockeruser":"docker" /etc/docker/.docker -R
 $ chmod g+rwx "/etc/docker/.docker" -R
 ```
 
-### 2. Install kubectl on all nodes and master(Node1, Node2, Node3, Master)
+### 2. Install kubectl on all nodes and rancher(Node1, Node2, Node3, Rancher)
 1.Install `kubectl`
 ```
 $ cat <<EOF > /etc/yum.repos.d/kubernetes.repo
@@ -74,7 +74,7 @@ EOF
 $ yum install -y kubectl
 ```
 
-### 2. Install RKE (Rancher Kubernetes Engine) master
+### 2. Install RKE (Rancher Kubernetes Engine) on Rancher
 
 1.Download `RKE`.
 ```
