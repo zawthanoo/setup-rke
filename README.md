@@ -1,5 +1,5 @@
 ## Setup RKE (Rancer Kubernetes Engine) cluster
----
+
 If you are not prepared `RKE` enviroment yet, follow [this installation guid](RKE_PREPARATION.md) for prepration. Before we start to setup `RKE` cluster, please check `ip` address on all nodes.
 
 Example, all VM `ip` address in my PC is:
@@ -49,7 +49,7 @@ $ ssh-copy-id dockeruser@192.168.123.5
 $ ssh-copy-id dockeruser@192.168.123.6
 $ ssh-copy-id dockeruser@192.168.123.7
 ```
-![ssh-keygen](/ssh-keygen.PNG)
+![ssh-keygen](/ssh.png)
 
 
 ### Setup RKE Cluster on Rancher Node 
