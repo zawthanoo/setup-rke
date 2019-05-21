@@ -2,56 +2,6 @@
 
 If you are not prepared `RKE` enviroment yet, follow [this installation guid](RKE_PREPARATION.md) for prepration. Before we start to setup `RKE` cluster, please check `ip` address on all nodes.
 
-Example, all VM `ip` address in my PC is:
-<table>
-  <tr>
-    <td>
-      Rancher
-    </td>
-    <td>
-      192.168.123.8
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Node1
-    </td>
-    <td>
-      192.168.123.9
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Node2
-    </td>
-    <td>
-      192.168.123.10
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Node3
-    </td>
-    <td>
-      192.168.123.11
-    </td>
-  </tr>
-</table>
-
-### Setup `SSH` tunneling `rancher` to all `nodes`
-Create `ssh` key
-```
-$ ssh-keygen
-```
-Copy `ssh` key to all nodes
-```
-$ ssh-copy-id dockeruser@192.168.123.9
-$ ssh-copy-id dockeruser@192.168.123.10
-$ ssh-copy-id dockeruser@192.168.123.11
-```
-Example:
-![ssh-keygen](/ssh.png)
-
 ### Setup RKE Cluster on Rancher Node 
 1. create a cluster config file, name as `rancher-cluster.yaml`.
 ```
@@ -81,5 +31,10 @@ services:
 ```
 $ rke up --config rancher-cluster.yaml
 ```
+If you get the message `Finished building Kubernetes cluster successfully` as below, you are successfully setup the `kubernetes` cluster.
+![rke](/rke.png)
 
-
+3. Set the `KUBECONFIG` environmental variable to the path of `kube_config_rancher-cluster.yml` which created by RKE installation.
+```
+export KUBECONFIG=$(pwd)/kube_config_rancher-cluster.yml
+```
