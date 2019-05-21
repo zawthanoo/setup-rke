@@ -1,6 +1,6 @@
 ## Preparation for HA Kubernets Cluster(RKE) on local PC?
 1. Install Docker on all nodes
-2. Install Kubectl on all nodes and master
+2. Install Kubectl on all nodes and rancher
 3. Install RKE on master.
 4. Setup SSH tunneling rancher to all nodes.
 5. Open firewall ports as a services for all nodes and rancher.
