@@ -1,7 +1,7 @@
 ## Preparation for HA Kubernets Cluster(RKE) on local PC?
 1. Install Docker on all nodes
 2. Install Kubectl on all nodes and rancher
-3. Install RKE on master.
+3. Install RKE on rancher.
 4. Setup SSH tunneling rancher to all nodes.
 5. Open firewall ports as a services for all nodes and rancher.
  
@@ -135,15 +135,27 @@ Example, all VM `ip` address in my PC is:
 1.Run `ssh-keygen` on Rancher.
 ```
 $ ssh-keygen
+....
+...
+..
 ```
-2.Copy `ssh-id` to all nodes.
+2.Copy `ssh-id` from rancher to all nodes.
 ```
 $ ssh-copy-id dockeruser@192.168.123.9
+....
+...
+..
 $ ssh-copy-id dockeruser@192.168.123.10
+....
+...
+..
 $ ssh-copy-id dockeruser@192.168.123.11
+....
+...
+..
 ```
 ### 5. Open firewall ports as a services for all nodes and rancher.
-1.Create `firewall-config` file for all nodes with name `node-firewall.xml`.
+1.Create `firewall-config` file on all nodes.
 ```
 $ vi node-firewall.xml
 ```
@@ -171,7 +183,7 @@ $ firewall-offline-cmd --new-service-from-file=rancher-firewall.xml --name=ranch
 $ firewall-cmd --reload
 $ firewall-cmd --add-service rancher-firewall
 ```
-2.Create `firewall-config` file for all rancher with name `rancher-firewall.xml`.
+2.Create `firewall-config` file for rancher.
 ```
 $ vi rancher-firewall.xml
 ```
