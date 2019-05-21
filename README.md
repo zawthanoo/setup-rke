@@ -17,7 +17,7 @@ Example, all VM `ip` address in my PC is:
       Node1
     </td>
     <td>
-      192.168.123.5
+      192.168.123.9
     </td>
   </tr>
   <tr>
@@ -25,7 +25,7 @@ Example, all VM `ip` address in my PC is:
       Node2
     </td>
     <td>
-      192.168.123.6
+      192.168.123.10
     </td>
   </tr>
   <tr>
@@ -33,7 +33,7 @@ Example, all VM `ip` address in my PC is:
       Node3
     </td>
     <td>
-      192.168.123.7
+      192.168.123.11
     </td>
   </tr>
 </table>
@@ -45,12 +45,12 @@ $ ssh-keygen
 ```
 Copy `ssh` key to all nodes
 ```
-$ ssh-copy-id dockeruser@192.168.123.5
-$ ssh-copy-id dockeruser@192.168.123.6
-$ ssh-copy-id dockeruser@192.168.123.7
+$ ssh-copy-id dockeruser@192.168.123.9
+$ ssh-copy-id dockeruser@192.168.123.10
+$ ssh-copy-id dockeruser@192.168.123.11
 ```
+Example:
 ![ssh-keygen](/ssh.png)
-
 
 ### Setup RKE Cluster on Rancher Node 
 1. create a cluster config file, name as `rancher-cluster.yaml`.
@@ -60,13 +60,13 @@ vi rancher-cluster.yaml
 rancher-cluster.yaml
 ```yaml
 nodes:
-  - address: 192.168.123.5
+  - address: 192.168.123.9
     user: dockeruser
     role: [controlplane, etcd, worker]
-  - address: 192.168.123.6
+  - address: 192.168.123.10
     user: dockeruser
     role: [controlplane, etcd, worker]
-  - address: 192.168.123.7
+  - address: 192.168.123.11
     user: dockeruser
     role: [controlplane, etcd, worker]
 
