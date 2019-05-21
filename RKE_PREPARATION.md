@@ -46,7 +46,7 @@ $ systemctl start docker
 $ docker version
 $ docker ps
 ```
-![Docker](/docker-snp.png)
+![Docker](/docker.png)
 
 8.Add a new user for docker and give permission
 ```
