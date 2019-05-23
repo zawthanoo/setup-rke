@@ -13,5 +13,5 @@ mv linux-amd64/helm /usr/bin/helm
 ```
 4.Check `helm` is running or not
 ```
-helm version
+helm help
 ```
