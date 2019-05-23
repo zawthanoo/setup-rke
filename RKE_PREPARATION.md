@@ -4,6 +4,8 @@
 3. Install RKE on rancher.
 4. Setup SSH tunneling rancher to all nodes.
 5. Open firewall ports as a services for all nodes and rancher.
+6. Config for iptable on all nodes
+7. Enable br_netfilter on all nodes
  
 Create four CentOs-7 VM :
 1. Rancher : CPU 2 cores, RAM 4G, HD 40G
@@ -209,4 +211,23 @@ $ firewall-cmd --add-service rancher-firewall
 $ systemctl stop firewalld
 $ systemctl disable firewalld
 $ systemctl status firewalld
+```
+
+### 6. Config for iptable on all nodes
+1.Edit `/etc/sysctl.conf` as below by using this command `vi /etc/sysctl.conf`.
+```
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward=1
+```
+
+### 7. Enable br_netfilter on all nodes
+```
+$ modprobe br_netfilter
+$ echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+```
+
+Reboot the all nodes
+```
+shutdown -r now
 ```
