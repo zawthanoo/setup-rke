@@ -87,7 +87,7 @@ $ wget https://github.com/rancher/rke/releases/download/v0.1.15/rke_linux-amd64
 ```
 $ mv rke_linux-amd64 /usr/bin/rke
 ```
-3.Make Exacuteable
+3.Make Executable
 ```
 $ chmod +x /usr/bin/rke
 ```
@@ -96,7 +96,7 @@ $ chmod +x /usr/bin/rke
 $ rke --version
 ```
 ### 4. Setup SSH tunneling rancher to all nodes.
-Clease check `ip` address on all nodes and rancher.
+Check `ip` address on all nodes and rancher.
 
 Example, all VM `ip` address in my PC is:
 <table>
@@ -165,18 +165,18 @@ node-firewall.xml
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <service>
-	<port port="2376" protocol="tcp"/>
-	<port port="2379" protocol="tcp"/>
-	<port port="2380" protocol="tcp"/>
-	<port port="8472" protocol="udp"/>
-	<port port="9099" protocol="tcp"/>
-	<port port="10250" protocol="tcp"/>
-	<port port="443" protocol="tcp"/>
-	<port port="6443" protocol="tcp"/>
-	<port port="8472" protocol="udp"/>
-	<port port="6443" protocol="tcp"/>
-	<port port="10254" protocol="tcp"/>
-	<port port="30000-32767" protocol="tcp"/>
+<port port="2376" protocol="tcp"/>
+<port port="2379" protocol="tcp"/>
+<port port="2380" protocol="tcp"/>
+<port port="8472" protocol="udp"/>
+<port port="9099" protocol="tcp"/>
+<port port="10250" protocol="tcp"/>
+<port port="443" protocol="tcp"/>
+<port port="6443" protocol="tcp"/>
+<port port="8472" protocol="udp"/>
+<port port="6443" protocol="tcp"/>
+<port port="10254" protocol="tcp"/>
+<port port="30000-32767" protocol="tcp"/>
 </service>
 ```
 Run the following command
@@ -193,11 +193,11 @@ rancher-firewall.xml
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <service>
-	<port port="80" protocol="tcp"/>
-	<port port="433" protocol="tcp"/>
-	<port port="22" protocol="tcp"/>
-	<port port="2376" protocol="tcp"/>
-	<port port="6443" protocol="tcp"/>
+<port port="80" protocol="tcp"/>
+<port port="433" protocol="tcp"/>
+<port port="22" protocol="tcp"/>
+<port port="2376" protocol="tcp"/>
+<port port="6443" protocol="tcp"/>
 </service>
 ```
 Run the following command
