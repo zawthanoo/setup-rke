@@ -36,5 +36,33 @@ If you get the message `Finished building Kubernetes cluster successfully` as be
 
 3. Set the `KUBECONFIG` environmental variable to the path of `kube_config_rancher-cluster.yml` which created by RKE installation.
 ```
-export KUBECONFIG=$(pwd)/kube_config_rancher-cluster.yml
+export KUBECONFIG=$(pwd)/kube_config_rancher-cluster.yaml
 ```
+4. Check all nods are running or not on the `RKE` cluster
+```
+$kubectl get nodes
+```
+![rke](/nodes-status.png)
+
+# Issue
+>Failed to start [rke-etcd-port-listener] container on host [192.168.123.11]: Error response from daemon: driver failed programming external connectivity on endpoint rke-etcd-port-listener (c35e1742f00f349baac3d57b968f2bf30c6b2eb82a586d4641e29f447f295d2c):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 2380 -j DNAT --to-destination 172.17.0.2:1337 ! -i docker0: iptables: No chain/target/match by that name.
+ (exit status 1))
+
+- Delete all docker image and container on all nodes.
+```
+$ docker system prune && docker rm $(docker ps -a -q) -f && docker rmi $(docker images -q) -f
+```
+- Restart docker on all nodes
+```
+$ systemctl restart docker
+```
+- Remove previous `rke` installation.
+```
+$ rke remove --config rancher-cluster.yaml
+```
+- Install `rke` agian
+```
+$ rke up --config rancher-cluster.yaml
+```
+
+
