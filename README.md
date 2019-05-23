@@ -34,11 +34,11 @@ $ rke up --config rancher-cluster.yaml
 If you get the message `Finished building Kubernetes cluster successfully` as below, you are successfully setup the `kubernetes` cluster.
 ![rke](/rke.png)
 
-3. Set the `KUBECONFIG` environmental variable to the path of `kube_config_rancher-cluster.yml` which created by RKE installation.
+3. Set the `KUBECONFIG` environmental variable to the path of `kube_config_rancher-cluster.yaml` which created by `RKE` installation.
 ```
 export KUBECONFIG=$(pwd)/kube_config_rancher-cluster.yaml
 ```
-4. Check all nods are running or not on the `RKE` cluster
+4. Check all of nodes status on the `RKE` cluster
 ```
 $kubectl get nodes
 ```
@@ -64,5 +64,3 @@ $ rke remove --config rancher-cluster.yaml
 ```
 $ rke up --config rancher-cluster.yaml
 ```
-
-
