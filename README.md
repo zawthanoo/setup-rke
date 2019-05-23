@@ -1,6 +1,6 @@
 ## Setup RKE (Rancher Kubernetes Engine) cluster
 
-If you are not prepared `RKE` environment yet, follow [this installation guid](RKE_PREPARATION.md) for preparation. Before we start to setup `RKE` cluster, please check `ip` address on all nodes.
+If `RKE` environment is prepared yet, please follow [this installation guid](RKE_PREPARATION.md). Before setup the `RKE` cluster, please check `ip` address on all nodes.
 
 ### Setup RKE Cluster on Rancher Node 
 1. create a cluster config file, name as `rancher-cluster.yaml`.
@@ -27,11 +27,11 @@ services:
     creation: 6h
     retention: 24h
 ```
-2. Run `rke up` commend to start the cluster. It will to take too long to base on your internet connection.
+2. Run `rke up` commend to start the cluster. It will to take too long to base on internet connection and hardware resources.
 ```
 $ rke up --config rancher-cluster.yaml
 ```
-If you get the message `Finished building Kubernetes cluster successfully` as below, you are successfully setup the `kubernetes` cluster.
+If the message `Finished building Kubernetes cluster successfully` is got, the `kubernetes` cluster is successfully setup.
 ![rke](/rke.png)
 
 3. Set the `KUBECONFIG` environmental variable to the path of `kube_config_rancher-cluster.yaml` which created by `RKE` installation.
@@ -44,7 +44,7 @@ $ kubectl get nodes
 ```
 ![nodes-status](/nodes-status.png)
 
-5. Check all of pods status on the `RKE` cluster. If all of pod are `Running` state, your cluster is ready to use.
+5. Check all of pods status on the `RKE` cluster. If all of pod are `Running` state, the cluster is ready to use.
 ```
 $ kubectl get pods --all-namespaces
 ```
