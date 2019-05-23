@@ -44,7 +44,7 @@ $ kubectl get nodes
 ```
 ![nodes-status](/nodes-status.png)
 
-5. Check all of pods status on the `RKE` cluster. If all of pod are `Running` state, the cluster is ready to use.
+5. Check all of pods status on the `RKE` cluster.
 ```
 $ kubectl get pods --all-namespaces
 ```
