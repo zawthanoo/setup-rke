@@ -1,6 +1,6 @@
 ## Setup RKE (Rancher Kubernetes Engine) cluster
 
-If `RKE` environment is prepared yet, please follow [this installation guid](RKE_PREPARATION.md). Before setup the `RKE` cluster, please check `ip` address on all nodes.
+If `RKE` environment is not prepared yet, please follow [this installation guid](RKE_PREPARATION.md). Before setup the `RKE` cluster, please check `ip` address on all nodes.
 
 ### Setup RKE Cluster on Rancher Node 
 1. create a cluster config file, name as `rancher-cluster.yaml`.
