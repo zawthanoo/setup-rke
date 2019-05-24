@@ -53,6 +53,49 @@ $ kubectl get pods --all-namespaces
 Most are `Running` and `Completed`.
 ![pods-status](/pods-status2.png)
 
+
+# Installation Rancher UI
+The Rancher UI is used to manage from a Web interface.
+
+1. Install Rancher UI on Rancher-VM
+```
+docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:stable
+```
+2.If Rancher UI is sucessfully installed, go `http://<IP-ADDRESS>` and login.
+
+![rancher-ui](/rancher-ui.png)
+
+# Import RKE Cluster to Rancher UI Dashboard
+1. Click `Add Cluster`.
+2. Select `Import` and give the cluster name. Eg. name like `rke-cluster`
+3. Click `Create`. it will show the following screen.
+
+![rancher-ui](/rke-cluster.png)
+
+4. Click 3rd `Copy to Clipboard`
+5. Modify the copy string as below. Make sure to add `--kubeconfig kube_config_rancher-cluster.yaml`.
+```
+curl --insecure -sfL https://192.168.123.8/v3/import/h97g6whx7nbkpbqkc98xkvp4dzwmn49nn9bmdzhcnpgshqm45h2d9p.yaml | kubectl --kubeconfig kube_config_rancher-cluster.yml apply -f -
+```
+6. Run No.5 command on `Rancher` VM.
+
+![rke-import-command](/rke-import.png)
+
+7. Click `Done` on Rancher UI.
+
+Import porcess take a few minutes.
+
+![rak-import-status](/rak-import-status.png)
+
+When `rke-cluster` is active. click the link to check the status.
+
+![rak-cluster-status](/rke-cluster-status.png)
+
+
+For more information [Rancher High Availability (HA) Install](https://rancher.com/docs/rancher/v2.x/en/installation/ha/).
+
+
+
 # Issue
 >Failed to start [rke-etcd-port-listener] container on host [192.168.123.11]: Error response from daemon: driver failed programming external connectivity on endpoint rke-etcd-port-listener (c35e1742f00f349baac3d57b968f2bf30c6b2eb82a586d4641e29f447f295d2c):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 2380 -j DNAT --to-destination 172.17.0.2:1337 ! -i docker0: iptables: No chain/target/match by that name.
  (exit status 1))
