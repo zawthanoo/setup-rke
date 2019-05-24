@@ -108,10 +108,6 @@ $ docker system prune && docker rm $(docker ps -a -q) -f && docker rmi $(docker 
 ```
 $ systemctl restart docker
 ```
-- Remove previous `rke` installation.
-```
-$ rke remove --config rancher-cluster.yaml
-```
 - Install `rke` agian
 ```
 $ rke up --config rancher-cluster.yaml
