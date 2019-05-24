@@ -13,7 +13,7 @@ Create four CentOs-7 VM :
 3. Node2/Kube2 : CPU 2 cores, RAM 4G, HD 40G
 4. Node3/Kube3 : CPU 2 cores, RAM 4G, HD 40G
 
-### 1. Install Docker on all nodes(Node1, Node2, Node3)
+### 1. Install Docker on all (Node1, Node2, Node3, Rancher)
 1.First, `yum` update.
  ```
 $ yum update
@@ -62,7 +62,7 @@ $ chown "dockeruser":"docker" /etc/docker/.docker -R
 $ chmod g+rwx "/etc/docker/.docker" -R
 ```
 
-### 2. Install kubectl on all nodes and rancher(Node1, Node2, Node3, Rancher)
+### 2. Install kubectl on all (Node1, Node2, Node3, Rancher)
 1.Install `kubectl`
 ```
 $ cat <<EOF > /etc/yum.repos.d/kubernetes.repo
@@ -156,7 +156,7 @@ $ ssh-copy-id dockeruser@192.168.123.11
 ...
 ..
 ```
-### 5. Open firewall ports as a services for all nodes and rancher.
+### 5. Open firewall ports as a services
 1.Create `firewall-config` file on all nodes.
 ```
 $ vi node-firewall.xml
@@ -185,7 +185,7 @@ $ firewall-offline-cmd --new-service-from-file=rancher-firewall.xml --name=ranch
 $ firewall-cmd --reload
 $ firewall-cmd --add-service rancher-firewall
 ```
-2.Create `firewall-config` file for rancher.
+2.Create `firewall-config` file on rancher.
 ```
 $ vi rancher-firewall.xml
 ```
