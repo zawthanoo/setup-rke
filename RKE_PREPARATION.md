@@ -34,8 +34,9 @@ $ yum list docker-ce --showduplicates | sort -r
 ```
 4.Install docker specific version. Currently, Rancher2 only support max docker version `17.03.xx`.
 ```
-$ yum install docker-ce-selinux-17.03.2.ce-1.el7.centos
-$ yum install docker-ce-17.03.2.ce-1.el7.centos
+$yum install -y --setopt=obsoletes=0 docker-ce-<VERSION STRING>.centos docker-ce-selinux-<VERSION STRING>.centos
+Example:
+$yum install -y --setopt=obsoletes=0 docker-ce-17.03.1.ce-1.el7.centos docker-ce-selinux-17.03.1.ce-1.el7.centos
 ```
 5.Enable `docker` service on boot level start.
 ```
