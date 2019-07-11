@@ -34,7 +34,7 @@ $ yum list docker-ce --showduplicates | sort -r
 ```
 4.Install docker specific version. Currently, Rancher2 only support max docker version `17.03.xx`.
 ```
-$yum install -y --setopt=obsoletes=0 docker-ce-<VERSION STRING>.centos docker-ce-selinux-<VERSION STRING>.centos
+$yum install -y --setopt=obsoletes=0 docker-ce-<VERSION STRING> docker-ce-selinux-<VERSION STRING>
 Example:
 $yum install -y --setopt=obsoletes=0 docker-ce-17.03.1.ce-1.el7.centos docker-ce-selinux-17.03.1.ce-1.el7.centos
 ```
